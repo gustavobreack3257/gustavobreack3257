@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Text, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native'
 
 import {Tasks} from '../../components/Tasks'
@@ -6,22 +6,21 @@ import {Tasks} from '../../components/Tasks'
 import { styles } from "./styles";
 
 export function Home() {
-  const tasksList = ["lavar a louça", "limpar a casa", "Dentista", "Pagar contas", "Cuidar do cachorro", "Fazer almoço",
-  "Tomar banho", "Jogar video game", "Jogar bola"]
-
+  const [tasksList, setTasksList] = useState<string[]>([])
+  const [tasksListName, setTasksListName] = useState('')
   function tasksAdd(){
-    if(tasksList.includes("lavar a louça")){
+    if(tasksList.includes(tasksListName)){
       return Alert.alert("Tarefa existe", "Essa tarefa ja existe!!")
     }
-
-    console.log("Voce adicinou uma tarefa")
+    setTasksList(prevState => [...prevState, tasksListName])
+    setTasksListName('')
   }
 
   function tasksRemove( name: string){
     Alert.alert("Remover", `Deseja remover a tarefa ${name}?`,[
       {
         text: "Sim",
-        onPress: () => Alert.alert("Deletado")
+        onPress: () => setTasksList(prevState => prevState.filter(tasksList => tasksList !== name))
       },
       {
         text: "Não",
@@ -37,13 +36,18 @@ export function Home() {
         <View style={styles.form}>
           <TextInput style={styles.Input}
           placeholder='Tarefas'
-          placeholderTextColor='black'/>
+          placeholderTextColor='black'
+          onChangeText={setTasksListName}
+          value={tasksListName}/>
 
           <TouchableOpacity style={styles.btn} onPress={tasksAdd}>
             <Text style={styles.btnText}>+</Text>
           </TouchableOpacity>
         </View>
-
+        <View style={styles.completed}>
+          <Text style={styles.completedText}>Concluidas:</Text>
+          <TextInput style={styles.inputCamp}></TextInput>
+        </View>
         <FlatList
         data={tasksList}
         keyExtractor={item => item}

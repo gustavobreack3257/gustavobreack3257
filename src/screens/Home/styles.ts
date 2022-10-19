@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native"
 export const styles = StyleSheet.create({
     container:{
       flex: 1,
-      backgroundColor: 'black',
+      backgroundColor: '#f0f8ff',
       padding: 24
     },
     header:{
@@ -14,12 +14,13 @@ export const styles = StyleSheet.create({
     },
     Input:{
       flex: 1,
-      backgroundColor: '#20abcc',
+      backgroundColor: '#b8860b',
       height: 58,
       borderRadius: 5,
       borderWidth: 2,
-      borderColor: '#b8860b',
+      borderColor: 'black',
       fontSize: 18,
+      fontWeight: 'bold',
       padding: 18,
       color: 'black',
       marginRight: 12,
@@ -40,10 +41,27 @@ export const styles = StyleSheet.create({
     form:{
       width: '100%',
       flexDirection: 'row',
-      marginBottom: 42
+      marginBottom: 20
     },
     ListEmptyTask:{
-      color: '#20b2cc',
+      marginTop: 20,
+      marginLeft: 35,
+      color: 'black',
       fontSize: 20
+    },
+    completed:{
+      flexDirection: 'row',
+      height: 30,
+      marginLeft: 5,
+    },
+    completedText:{
+      fontSize: 15,
+      fontWeight: 'bold'
+    },
+    inputCamp:{
+      height: 16,
+      marginTop: 3,
+      marginLeft: 3,
+      backgroundColor: 'black'
     }
   })
